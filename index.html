@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Recurso educativo interactivo sobre fundamentos de ingeniería de procesos, requerimientos del cliente, tipos de procesos y capacidad de producción.">
+  <meta name="theme-color" content="#10233f">
+  <title>Ingeniería de Procesos Industriales | Fundamentos</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2310233f'/%3E%3Cpath d='M10 32h14m16 0h14M24 20h16v24H24z' fill='none' stroke='%23f2aa35' stroke-width='5'/%3E%3Cpath d='m18 25 7 7-7 7m28-14 7 7-7 7' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --navy: #10233f;
+      --navy-2: #17375f;
+      --blue: #2067a3;
+      --sky: #eaf4fb;
+      --amber: #f2aa35;
+      --amber-soft: #fff3d9;
+      --ink: #172231;
+      --muted: #5c6876;
+      --line: #d6dee8;
+      --surface: #ffffff;
+      --paper: #f4f7fa;
+      --success: #147a55;
+      --success-soft: #e7f6ef;
+      --danger: #a33a3a;
+      --danger-soft: #fff0f0;
+      --shadow: 0 12px 34px rgba(16, 35, 63, .10);
+      --radius: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(23, 55, 95, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 55, 95, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    img, svg { max-width: 100%; }
+    :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+    .skip-link {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      z-index: 1000;
+      padding: .65rem 1rem;
+      color: #fff;
+      background: var(--navy);
+      border-radius: 8px;
+      transform: translateY(-160%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      color: #fff;
+      background: rgba(16, 35, 63, .96);
+      backdrop-filter: blur(12px);
+      border-bottom: 3px solid var(--amber);
+    }
+    .nav-wrap {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      min-height: 66px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: .01em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      color: var(--navy);
+      background: var(--amber);
+      border-radius: 9px;
+      font-size: .9rem;
+      font-weight: 900;
+    }
+    .nav-toggle {
+      display: none;
+      border: 1px solid rgba(255,255,255,.35);
+      color: #fff;
+      background: transparent;
+      border-radius: 8px;
+      padding: .45rem .7rem;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      overflow-x: auto;
+    }
+    .nav-links a {
+      display: block;
+      padding: .55rem .65rem;
+      border-radius: 7px;
+      text-decoration: none;
+      color: #dce8f5;
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.10); }
+
+    .hero {
+      color: #fff;
+      background:
+        radial-gradient(circle at 85% 25%, rgba(242,170,53,.20), transparent 28%),
+        linear-gradient(135deg, var(--navy), #183d69 65%, #1f527f);
+      border-bottom: 1px solid #8da3bc;
+    }
+    .hero-grid {
+      width: min(var(--max), calc(100% - 2rem));
+      min-height: 510px;
+      margin: auto;
+      padding: 4.4rem 0 3.6rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, .85fr);
+      gap: 3rem;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin: 0 0 1rem;
+      color: #ffd78c;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--amber);
+    }
+    h1 {
+      max-width: 750px;
+      margin: 0;
+      font-size: clamp(2.35rem, 6vw, 4.85rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+    .hero-lead {
+      max-width: 700px;
+      margin: 1.4rem 0 1.6rem;
+      color: #dae7f4;
+      font-size: 1.08rem;
+    }
+    .topic-pills { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .topic-pill {
+      padding: .48rem .75rem;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      font-size: .88rem;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 1.4rem;
+      color: var(--ink);
+      background: rgba(255,255,255,.97);
+      border: 1px solid rgba(255,255,255,.65);
+      border-radius: 22px;
+      box-shadow: 0 25px 70px rgba(0,0,0,.22);
+    }
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px dashed #b9c6d5;
+      border-radius: 14px;
+      pointer-events: none;
+    }
+    .hero-panel h2 {
+      position: relative;
+      margin: .3rem .3rem 1rem;
+      font-size: 1rem;
+      color: var(--navy-2);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .mini-process {
+      position: relative;
+      padding: .8rem .4rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: .35rem;
+    }
+    .mini-node {
+      min-height: 92px;
+      padding: .85rem .55rem;
+      display: grid;
+      align-content: center;
+      text-align: center;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+    .mini-node strong { color: var(--navy-2); }
+    .mini-node small { color: var(--muted); line-height: 1.35; }
+    .mini-node.core { color: #fff; background: var(--navy-2); border-color: var(--navy-2); }
+    .mini-node.core strong, .mini-node.core small { color: inherit; }
+    .mini-arrow { color: var(--amber); font-size: 1.6rem; font-weight: 900; }
+    .feedback-loop {
+      position: relative;
+      margin: .4rem .4rem 0;
+      padding: .7rem;
+      color: var(--navy-2);
+      background: var(--amber-soft);
+      border-radius: 10px;
+      text-align: center;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    main { width: min(var(--max), calc(100% - 2rem)); margin: auto; }
+    section { margin: 5rem 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 90px minmax(0, 1fr);
+      gap: 1.3rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+    .section-no {
+      color: var(--amber);
+      font-size: 2.65rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .section-kicker {
+      margin: 0 0 .35rem;
+      color: var(--blue);
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+    h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.7rem, 4vw, 2.55rem);
+      line-height: 1.15;
+      letter-spacing: -.025em;
+    }
+    .section-intro { max-width: 850px; margin: .7rem 0 0; color: var(--muted); }
+    h3 { color: var(--navy-2); line-height: 1.25; }
+    h4 { color: var(--navy-2); }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .callout {
+      padding: 1.2rem 1.3rem;
+      border-left: 5px solid var(--amber);
+      background: var(--amber-soft);
+      border-radius: 0 12px 12px 0;
+    }
+    .callout strong { color: var(--navy); }
+    .note {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .definition-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .definition {
+      padding: 1.2rem;
+      border-top: 5px solid var(--blue);
+    }
+    .definition:nth-child(2) { border-top-color: #3d88a8; }
+    .definition:nth-child(3) { border-top-color: var(--amber); }
+    .definition:nth-child(4) { border-top-color: #6a6d96; }
+    .definition h3 { margin: 0 0 .55rem; font-size: 1.05rem; }
+    .definition p { margin: 0; color: var(--muted); font-size: .94rem; }
+
+    .process-board {
+      padding: 1.5rem;
+      overflow: hidden;
+    }
+    .process-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .8rem;
+      margin-bottom: 1rem;
+    }
+    .control-chip {
+      padding: .8rem;
+      text-align: center;
+      color: var(--navy-2);
+      background: var(--sky);
+      border: 1px dashed #8eb4d1;
+      border-radius: 10px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      gap: .5rem;
+      align-items: stretch;
+    }
+    .flow-node {
+      min-height: 145px;
+      padding: 1.05rem;
+      display: grid;
+      align-content: start;
+      border: 2px solid #bed0e0;
+      border-radius: 14px;
+      background: #f8fbfd;
+    }
+    .flow-node:nth-of-type(3) { color: #fff; background: var(--navy-2); border-color: var(--navy-2); }
+    .flow-node:nth-of-type(7) { background: var(--amber-soft); border-color: var(--amber); }
+    .flow-node strong { display: block; margin-bottom: .5rem; }
+    .flow-node ul { margin: 0; padding-left: 1.1rem; font-size: .88rem; line-height: 1.55; }
+    .flow-arrow { display: grid; place-items: center; color: var(--amber); font-size: 1.6rem; font-weight: 900; }
+    .loop-line {
+      margin-top: 1rem;
+      padding: .8rem 1rem;
+      color: #fff;
+      background: linear-gradient(90deg, var(--blue), var(--navy-2));
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    .example-card { padding: 1.35rem; }
+    .example-card h3 { margin-top: 0; }
+    .compact-list { display: grid; gap: .55rem; margin: 0; padding: 0; list-style: none; }
+    .compact-list li { padding-left: 1.25rem; position: relative; }
+    .compact-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .68rem;
+      width: 7px;
+      height: 7px;
+      background: var(--amber);
+      transform: rotate(45deg);
+    }
+
+    .chain {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      overflow-x: auto;
+      padding: .5rem 0 1rem;
+    }
+    .chain span {
+      flex: 0 0 auto;
+      padding: .75rem .9rem;
+      color: var(--navy);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .chain b { color: var(--amber); font-size: 1.25rem; }
+
+    .table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--line); }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { padding: .9rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: #fff; background: var(--navy-2); font-size: .88rem; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+
+    .activity {
+      margin-top: 1.5rem;
+      padding: 1.4rem;
+    }
+    .activity h3 { margin-top: 0; }
+    .classify-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      gap: 1rem;
+      align-items: center;
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .classify-row:last-of-type { border-bottom: 0; }
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: .72rem .8rem;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid #a9b7c7;
+      border-radius: 9px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      min-height: 44px;
+      padding: .7rem 1rem;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-weight: 800;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { color: #fff; background: var(--navy-2); }
+    .btn-primary:hover { background: var(--blue); }
+    .btn-secondary { color: var(--navy); background: var(--amber); }
+    .btn-ghost { color: var(--navy); background: #fff; border-color: var(--line); }
+    .feedback {
+      min-height: 1.5rem;
+      margin-top: .8rem;
+      font-weight: 700;
+    }
+    .feedback.ok { color: var(--success); }
+    .feedback.error { color: var(--danger); }
+
+    .tabs { margin-top: 1.5rem; }
+    .tab-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .6rem;
+      margin-bottom: 1rem;
+    }
+    .tab-btn {
+      min-height: 56px;
+      padding: .8rem;
+      border: 1px solid var(--line);
+      color: var(--navy);
+      background: #fff;
+      border-radius: 12px;
+      font-weight: 800;
+    }
+    .tab-btn[aria-selected="true"] {
+      color: #fff;
+      background: var(--navy-2);
+      border-color: var(--navy-2);
+      box-shadow: inset 0 -4px 0 var(--amber);
+    }
+    .tab-panel {
+      padding: 1.5rem;
+    }
+    .tab-panel[hidden] { display: none; }
+    .tab-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 1.5rem;
+    }
+    .sequence {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .4rem;
+      padding: 1rem;
+      background: var(--sky);
+      border-radius: 12px;
+    }
+    .sequence span {
+      padding: .48rem .6rem;
+      background: #fff;
+      border: 1px solid #bdd0df;
+      border-radius: 7px;
+      font-size: .87rem;
+    }
+    .sequence b { color: var(--amber); }
+
+    .process-levels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+    .level { padding: 1.3rem; }
+    .level .tag {
+      display: inline-block;
+      margin-bottom: .7rem;
+      padding: .25rem .55rem;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .capacity-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: .8rem;
+      margin: 1.4rem 0;
+    }
+    .capacity-card {
+      padding: 1rem;
+      border-top: 5px solid var(--blue);
+    }
+    .capacity-card:nth-child(2) { border-top-color: #3d88a8; }
+    .capacity-card:nth-child(3) { border-top-color: var(--success); }
+    .capacity-card:nth-child(4) { border-top-color: var(--amber); }
+    .capacity-card:nth-child(5) { border-top-color: var(--danger); }
+    .capacity-card h3 { margin: 0 0 .45rem; font-size: 1rem; }
+    .capacity-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .formula-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .formula {
+      padding: 1.4rem;
+      text-align: center;
+      background: var(--navy);
+      color: #fff;
+      border-radius: var(--radius);
+    }
+    .formula strong { display: block; margin-bottom: .65rem; color: #ffd78c; }
+    .fraction {
+      display: inline-grid;
+      grid-template-rows: auto auto;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0 .35rem;
+    }
+    .fraction span:first-child { border-bottom: 1px solid #fff; }
+
+    .worked-example {
+      margin-top: 1.3rem;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 1.5rem;
+    }
+    .data-stack { display: grid; gap: .65rem; }
+    .data-stack div {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .75rem;
+      background: #f3f7fa;
+      border-radius: 9px;
+    }
+    .calculation {
+      padding: .85rem 1rem;
+      margin-bottom: .65rem;
+      border-left: 4px solid var(--amber);
+      background: var(--amber-soft);
+      border-radius: 0 9px 9px 0;
+    }
+
+    .bottleneck {
+      margin-top: 1.4rem;
+      padding: 1.5rem;
+    }
+    .station-line {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .8rem;
+      margin: 1rem 0;
+    }
+    .station {
+      position: relative;
+      padding: 1rem;
+      text-align: center;
+      border: 2px solid #aac0d2;
+      border-radius: 12px;
+      background: #f8fbfd;
+    }
+    .station:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -.75rem;
+      top: 50%;
+      z-index: 2;
+      width: 1.5rem;
+      color: var(--amber);
+      font-size: 1.4rem;
+      font-weight: 900;
+      transform: translateY(-50%);
+    }
+    .station strong { display: block; color: var(--navy); }
+    .station.bottle {
+      color: #fff;
+      background: var(--danger);
+      border-color: var(--danger);
+    }
+    .station.bottle strong { color: #fff; }
+
+    .calculator {
+      margin-top: 1.5rem;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
+    .field label { display: block; margin-bottom: .35rem; color: var(--navy); font-weight: 750; }
+    .field.full { grid-column: 1 / -1; }
+    .calc-results {
+      min-height: 100%;
+      padding: 1.2rem;
+      color: #fff;
+      background: var(--navy);
+      border-radius: 14px;
+    }
+    .calc-results h3 { margin-top: 0; color: #ffd78c; }
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .75rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+    }
+    .metric output { color: #ffd78c; font-size: 1.15rem; font-weight: 900; }
+    .calc-message { margin: .9rem 0 0; color: #dbe7f3; }
+
+    .case {
+      padding: 1.6rem;
+      border-left: 8px solid var(--amber);
+    }
+    .case h3 { margin-top: 0; }
+    .answer-panel {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      background: var(--sky);
+      border: 1px solid #bad0e2;
+      border-radius: 12px;
+    }
+    .answer-panel[hidden] { display: none; }
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .8rem;
+    }
+    .analysis-grid div {
+      padding: .8rem;
+      background: #fff;
+      border-radius: 8px;
+    }
+    .analysis-grid strong { display: block; color: var(--navy); }
+
+    .quiz-shell { padding: 1.5rem; }
+    .quiz-status {
+      position: sticky;
+      top: 78px;
+      z-index: 20;
+      margin-bottom: 1rem;
+      padding: .85rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: #fff;
+      background: var(--navy);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    .quiz-list { display: grid; gap: 1rem; }
+    .question {
+      padding: 1.2rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .question h3 { margin: 0 0 .8rem; font-size: 1rem; }
+    .options { display: grid; gap: .5rem; }
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: .65rem;
+      padding: .7rem .75rem;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+    .option:hover { background: #f5f8fb; }
+    .option input { margin-top: .28rem; }
+    .question-actions { margin-top: .8rem; display: flex; align-items: center; gap: .8rem; flex-wrap: wrap; }
+    .question-feedback { margin: 0; font-weight: 700; }
+    .question.correct { border-color: #65b495; box-shadow: inset 5px 0 0 var(--success); }
+    .question.incorrect { border-color: #d68a8a; box-shadow: inset 5px 0 0 var(--danger); }
+    .score-final {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      text-align: center;
+      color: var(--navy);
+      background: var(--amber-soft);
+      border-radius: 12px;
+      font-weight: 800;
+    }
+
+    .sources {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 1.5rem;
+    }
+    .sources ul { margin: 0; padding-left: 1.2rem; }
+    .sources li { margin-bottom: .55rem; }
+    footer {
+      margin-top: 5rem;
+      padding: 2rem 1rem;
+      color: #dce7f2;
+      background: var(--navy);
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; min-height: auto; }
+      .hero-panel { max-width: 700px; }
+      .definition-grid, .capacity-grid { grid-template-columns: repeat(2, 1fr); }
+      .capacity-card:last-child { grid-column: 1 / -1; }
+      .flow { grid-template-columns: 1fr; }
+      .flow-arrow { transform: rotate(90deg); }
+      .process-controls { grid-template-columns: 1fr; }
+      .worked-example, .calculator, .sources { grid-template-columns: 1fr; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 66px;
+        left: 0;
+        right: 0;
+        padding: .75rem 1rem 1rem;
+        background: var(--navy);
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links.open { display: flex; }
+    }
+
+    @media (max-width: 720px) {
+      body { font-size: 16px; }
+      .hero-grid { padding: 3.2rem 0 2.6rem; gap: 2rem; }
+      .mini-process { grid-template-columns: 1fr; }
+      .mini-arrow { transform: rotate(90deg); text-align: center; }
+      .section-head { grid-template-columns: 58px minmax(0, 1fr); }
+      .section-no { font-size: 2rem; }
+      .definition-grid, .example-grid, .formula-grid, .process-levels, .analysis-grid { grid-template-columns: 1fr; }
+      .tab-list { grid-template-columns: 1fr; }
+      .tab-grid { grid-template-columns: 1fr; }
+      .capacity-grid { grid-template-columns: 1fr; }
+      .capacity-card:last-child { grid-column: auto; }
+      .classify-row { grid-template-columns: 1fr; gap: .5rem; }
+      .station-line { grid-template-columns: 1fr; }
+      .station:not(:last-child)::after { right: 50%; top: auto; bottom: -1.2rem; transform: translateX(50%) rotate(90deg); }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .quiz-status { top: 72px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media print {
+      .topbar, .nav-toggle, .btn, .quiz-status { display: none !important; }
+      body { background: #fff; }
+      .card { box-shadow: none; break-inside: avoid; }
+      section { margin: 2rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <header class="topbar">
+    <nav class="nav-wrap" aria-label="Navegación principal">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark" aria-hidden="true">IP</span>
+        <span>Ingeniería de Procesos</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navLinks">Menú</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#requerimientos">Requerimientos</a></li>
+        <li><a href="#tipos">Tipos</a></li>
+        <li><a href="#capacidad">Capacidad</a></li>
+        <li><a href="#caso">Caso</a></li>
+        <li><a href="#practica">Práctica</a></li>
+        <li><a href="#fuentes">Fuentes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <header class="hero" id="inicio">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Unidad 1 · Fundamentos</p>
+        <h1>Ingeniería de Procesos Industriales</h1>
+        <p class="hero-lead">Un proceso conecta necesidades, recursos y actividades para producir resultados que generen valor. En este recorrido estudiarás los temas 1.1, 1.2 y 1.3 del programa.</p>
+        <div class="topic-pills" aria-label="Temas del recurso">
+          <span class="topic-pill">1.1 Requerimientos</span>
+          <span class="topic-pill">1.2 Manufactura y servicios</span>
+          <span class="topic-pill">1.3 Capacidad</span>
+        </div>
+      </div>
+      <div class="hero-panel" aria-label="Resumen visual de un proceso">
+        <h2>La lógica esencial</h2>
+        <div class="mini-process">
+          <div class="mini-node"><strong>Entradas</strong><small>Materiales, información, energía</small></div>
+          <span class="mini-arrow" aria-hidden="true">→</span>
+          <div class="mini-node core"><strong>Transformación</strong><small>Actividades que agregan valor</small></div>
+          <span class="mini-arrow" aria-hidden="true">→</span>
+          <div class="mini-node"><strong>Resultados</strong><small>Bienes, servicios o información</small></div>
+        </div>
+        <div class="feedback-loop">El cliente evalúa el resultado y aporta retroalimentación</div>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section id="proceso" aria-labelledby="titulo-proceso">
+      <div class="section-head">
+        <span class="section-no">01</span>
+        <div>
+          <p class="section-kicker">Punto de partida</p>
+          <h2 id="titulo-proceso">¿Qué es un proceso?</h2>
+          <p class="section-intro">Es un conjunto ordenado e interrelacionado de actividades que utiliza entradas y recursos para obtener resultados previstos. El propósito no es solamente “hacer algo”, sino producir valor para un cliente interno o externo.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Idea clave:</strong> un proceso tiene un propósito, límites, responsables, entradas, actividades, recursos, salidas, controles e indicadores. La retroalimentación permite corregir o mejorar su desempeño.
+      </div>
+
+      <div class="definition-grid">
+        <article class="definition card">
+          <h3>Proceso</h3>
+          <p>Conjunto completo de actividades relacionadas que convierte entradas en resultados.</p>
+        </article>
+        <article class="definition card">
+          <h3>Actividad</h3>
+          <p>Parte del proceso que agrupa acciones con un objetivo específico.</p>
+        </article>
+        <article class="definition card">
+          <h3>Tarea</h3>
+          <p>Acción concreta y delimitada que forma parte de una actividad.</p>
+        </article>
+        <article class="definition card">
+          <h3>Procedimiento</h3>
+          <p>Forma especificada de realizar una actividad o un proceso.</p>
+        </article>
+      </div>
+
+      <h3>Diagrama general de un proceso</h3>
+      <div class="process-board card" role="img" aria-label="Diagrama de entradas, transformación, salidas y cliente, con recursos, controles, indicadores y retroalimentación">
+        <div class="process-controls">
+          <div class="control-chip">Recursos: personas, equipos, instalaciones y tecnología</div>
+          <div class="control-chip">Controles: criterios, instrucciones y verificaciones</div>
+          <div class="control-chip">Indicadores: tiempo, calidad, costo y productividad</div>
+        </div>
+        <div class="flow">
+          <div class="flow-node">
+            <strong>Entradas</strong>
+            <ul><li>Materiales</li><li>Información</li><li>Energía</li><li>Requerimientos</li></ul>
+          </div>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <div class="flow-node">
+            <strong>Transformación</strong>
+            <ul><li>Operaciones</li><li>Decisiones</li><li>Actividades</li><li>Agregación de valor</li></ul>
+          </div>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <div class="flow-node">
+            <strong>Salidas</strong>
+            <ul><li>Bienes</li><li>Servicios</li><li>Información</li><li>Residuos</li></ul>
+          </div>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <div class="flow-node">
+            <strong>Cliente</strong>
+            <ul><li>Interno</li><li>Externo</li><li>Usuario</li><li>Siguiente proceso</li></ul>
+          </div>
+        </div>
+        <div class="loop-line">Retroalimentación: la información del resultado regresa al proceso para controlar, corregir y mejorar.</div>
+      </div>
+
+      <div class="example-grid">
+        <article class="example-card card">
+          <h3>Ejemplo didáctico: una taza de café</h3>
+          <ul class="compact-list">
+            <li><strong>Entradas:</strong> café, agua, pedido e información de preparación.</li>
+            <li><strong>Recursos:</strong> barista, molino, método de extracción, energía y tiempo.</li>
+            <li><strong>Actividades:</strong> pesar, moler, calentar, extraer y servir.</li>
+            <li><strong>Salida:</strong> bebida preparada y entregada.</li>
+          </ul>
+        </article>
+        <article class="example-card card">
+          <h3>Control y aprendizaje</h3>
+          <ul class="compact-list">
+            <li><strong>Cliente:</strong> persona que solicitó la bebida.</li>
+            <li><strong>Control:</strong> comprobar pedido, cantidad, temperatura o presentación definidos.</li>
+            <li><strong>Indicador:</strong> tiempo de entrega o pedidos entregados correctamente.</li>
+            <li><strong>Retroalimentación:</strong> comentarios del cliente o registros de errores.</li>
+          </ul>
+          <p class="note">El caso es hipotético y se utiliza únicamente para mostrar los elementos de un proceso.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="requerimientos" aria-labelledby="titulo-requerimientos">
+      <div class="section-head">
+        <span class="section-no">1.1</span>
+        <div>
+          <p class="section-kicker">Del cliente al proceso</p>
+          <h2 id="titulo-requerimientos">Requerimientos y especificaciones</h2>
+          <p class="section-intro">Diseñar un proceso comienza por comprender qué necesita el cliente y traducirlo en condiciones que la organización pueda comunicar, ejecutar y comprobar.</p>
+        </div>
+      </div>
+
+      <div class="chain" aria-label="Relación entre necesidad, requerimiento, especificación, proceso, resultado y satisfacción">
+        <span>Necesidad</span><b aria-hidden="true">→</b>
+        <span>Requerimiento</span><b aria-hidden="true">→</b>
+        <span>Especificación</span><b aria-hidden="true">→</b>
+        <span>Proceso</span><b aria-hidden="true">→</b>
+        <span>Bien o servicio</span><b aria-hidden="true">→</b>
+        <span>Satisfacción</span>
+      </div>
+
+      <div class="definition-grid">
+        <article class="definition card"><h3>Necesidad</h3><p>Carencia o problema que la persona u organización busca resolver.</p></article>
+        <article class="definition card"><h3>Expectativa</h3><p>Resultado o nivel de desempeño que el cliente espera recibir.</p></article>
+        <article class="definition card"><h3>Requerimiento</h3><p>Condición que debe cumplirse para responder a una necesidad o compromiso acordado.</p></article>
+        <article class="definition card"><h3>Especificación</h3><p>Descripción concreta de características o criterios que permiten verificar el cumplimiento.</p></article>
+      </div>
+
+      <p><strong>Característica de calidad:</strong> propiedad de un bien, servicio o proceso que puede utilizarse para evaluar si satisface un requerimiento. Puede relacionarse con dimensiones, tiempo, confiabilidad, seguridad, exactitud o atención, según el caso.</p>
+      <div class="callout"><strong>Una buena especificación</strong> debe ser clara y, cuando sea posible, medible y verificable. “Entrega rápida” expresa una expectativa; “entrega dentro del plazo acordado en el pedido” permite establecer una comprobación.</div>
+
+      <h3>De la necesidad a la comprobación</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Organización</th><th>Necesidad del cliente</th><th>Requerimiento</th><th>Especificación verificable</th><th>Comprobación</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Manufactura</td>
+              <td>Una pieza compatible con su ensamble.</td>
+              <td>La pieza debe ajustarse al diseño autorizado.</td>
+              <td>Dimensiones y material indicados en el plano aprobado.</td>
+              <td>Medición e inspección contra el plano.</td>
+            </tr>
+            <tr>
+              <td>Servicio</td>
+              <td>Recibir atención dentro del horario acordado.</td>
+              <td>La cita debe iniciar en el intervalo confirmado.</td>
+              <td>Hora de inicio registrada y comparada con la cita.</td>
+              <td>Registro de agenda y hora real de atención.</td>
+            </tr>
+            <tr>
+              <td>Comercializadora</td>
+              <td>Recibir el producto solicitado completo y sin daño.</td>
+              <td>El pedido debe coincidir con la orden aceptada.</td>
+              <td>Código, cantidad y condición del producto conforme a la orden.</td>
+              <td>Cotejo de orden, surtido y evidencia de entrega.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Los ejemplos son didácticos. En una operación real, las especificaciones deben provenir de los requisitos aplicables y de los acuerdos con el cliente.</p>
+
+      <div class="activity card" id="classifyActivity">
+        <h3>Actividad: necesidad o especificación</h3>
+        <p>Clasifica cada expresión. Una especificación contiene un criterio que puede comprobarse.</p>
+        <div class="classify-row">
+          <span>“Necesito que el producto sea fácil de transportar”.</span>
+          <select data-answer="necesidad" aria-label="Clasificación de la expresión 1"><option value="">Selecciona</option><option value="necesidad">Necesidad</option><option value="especificacion">Especificación</option></select>
+        </div>
+        <div class="classify-row">
+          <span>“El pedido debe contener los códigos y cantidades de la orden confirmada”.</span>
+          <select data-answer="especificacion" aria-label="Clasificación de la expresión 2"><option value="">Selecciona</option><option value="necesidad">Necesidad</option><option value="especificacion">Especificación</option></select>
+        </div>
+        <div class="classify-row">
+          <span>“Quiero recibir atención sin esperar demasiado”.</span>
+          <select data-answer="necesidad" aria-label="Clasificación de la expresión 3"><option value="">Selecciona</option><option value="necesidad">Necesidad</option><option value="especificacion">Especificación</option></select>
+        </div>
+        <div class="classify-row">
+          <span>“La hora real de inicio debe registrarse y compararse con la cita acordada”.</span>
+          <select data-answer="especificacion" aria-label="Clasificación de la expresión 4"><option value="">Selecciona</option><option value="necesidad">Necesidad</option><option value="especificacion">Especificación</option></select>
+        </div>
+        <button class="btn btn-primary" id="checkClassify" type="button">Comprobar</button>
+        <p class="feedback" id="classifyFeedback" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section id="tipos" aria-labelledby="titulo-tipos">
+      <div class="section-head">
+        <span class="section-no">1.2</span>
+        <div>
+          <p class="section-kicker">Operaciones en contexto</p>
+          <h2 id="titulo-tipos">Manufactura, servicios y comercialización</h2>
+          <p class="section-intro">Los tres contextos requieren procesos, recursos, controles e indicadores. Lo que cambia es la naturaleza de la transformación, la salida y la participación del cliente.</p>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab-list" role="tablist" aria-label="Tipos de procesos">
+          <button class="tab-btn" id="tab-manufactura" role="tab" aria-selected="true" aria-controls="panel-manufactura" type="button">Manufactura</button>
+          <button class="tab-btn" id="tab-servicio" role="tab" aria-selected="false" aria-controls="panel-servicio" type="button">Servicios</button>
+          <button class="tab-btn" id="tab-comercial" role="tab" aria-selected="false" aria-controls="panel-comercial" type="button">Comercializadora</button>
+        </div>
+
+        <article class="tab-panel card" id="panel-manufactura" role="tabpanel" aria-labelledby="tab-manufactura">
+          <div class="tab-grid">
+            <div>
+              <h3>Proceso de manufactura</h3>
+              <p>Transforma materiales mediante operaciones físicas, químicas o de ensamble para obtener un producto. La transformación puede cambiar forma, composición, propiedades o configuración.</p>
+              <ul class="compact-list">
+                <li><strong>Entradas:</strong> materiales, componentes e información técnica.</li>
+                <li><strong>Recursos:</strong> personas, máquinas, herramientas, energía e instalaciones.</li>
+                <li><strong>Salida:</strong> producto y, en algunos casos, subproductos o residuos.</li>
+                <li><strong>Controles:</strong> inspecciones, parámetros del proceso y criterios de aceptación.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Secuencia general: pieza metálica sencilla</h4>
+              <div class="sequence"><span>Recepción</span><b>→</b><span>Inspección</span><b>→</b><span>Corte o maquinado</span><b>→</b><span>Verificación</span><b>→</b><span>Acabado</span><b>→</b><span>Empaque</span></div>
+              <p class="note">Secuencia hipotética. El proceso real depende del material, diseño, equipo y especificaciones aplicables.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="tab-panel card" id="panel-servicio" role="tabpanel" aria-labelledby="tab-servicio" hidden>
+          <div class="tab-grid">
+            <div>
+              <h3>Proceso de servicio</h3>
+              <p>Genera principalmente un resultado intangible, una solución o una experiencia. En numerosos servicios, el cliente participa aportando información o interactuando durante la prestación.</p>
+              <ul class="compact-list">
+                <li><strong>Rasgos frecuentes:</strong> participación del cliente y variabilidad.</li>
+                <li><strong>Tiempo:</strong> producción y consumo pueden ocurrir de manera cercana.</li>
+                <li><strong>Capacidad:</strong> una hora de atención no utilizada normalmente no se almacena para otro día.</li>
+                <li><strong>Control:</strong> registros, protocolos, tiempo, exactitud y percepción del cliente.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Secuencia general: mantenimiento</h4>
+              <div class="sequence"><span>Solicitud</span><b>→</b><span>Registro</span><b>→</b><span>Diagnóstico</span><b>→</b><span>Servicio</span><b>→</b><span>Verificación</span><b>→</b><span>Cierre</span></div>
+              <p class="note">Los rasgos señalados son frecuentes, pero no se presentan con la misma intensidad en todos los servicios.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="tab-panel card" id="panel-comercial" role="tabpanel" aria-labelledby="tab-comercial" hidden>
+          <div class="tab-grid">
+            <div>
+              <h3>Procesos de una comercializadora</h3>
+              <p>Una empresa comercializadora compra, almacena, promueve, vende y distribuye productos elaborados por otras organizaciones, sin realizar necesariamente una transformación física significativa.</p>
+              <ul class="compact-list">
+                <li><strong>Procesos comerciales:</strong> selección de oferta, promoción, venta y posventa.</li>
+                <li><strong>Procesos logísticos:</strong> recepción, almacenamiento, surtido y distribución.</li>
+                <li><strong>Salida:</strong> producto correcto, disponible y entregado junto con el servicio asociado.</li>
+                <li><strong>Indicadores:</strong> pedidos completos, tiempo de entrega, exactitud de inventario y devoluciones.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>Secuencia general: distribuidora</h4>
+              <div class="sequence"><span>Proveedores</span><b>→</b><span>Compra</span><b>→</b><span>Recepción</span><b>→</b><span>Almacén</span><b>→</b><span>Venta</span><b>→</b><span>Distribución</span><b>→</b><span>Posventa</span></div>
+              <p class="note">“Comercializadora” describe el tipo de organización o actividad. Sus operaciones integran procesos comerciales, logísticos, administrativos y de servicio.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <h3>Comparación de los tres contextos</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Criterio</th><th>Manufactura</th><th>Servicios</th><th>Comercializadora</th></tr></thead>
+          <tbody>
+            <tr><td>Propósito</td><td>Obtener un producto mediante transformación.</td><td>Resolver una necesidad mediante una prestación.</td><td>Hacer disponible y entregar una oferta al mercado.</td></tr>
+            <tr><td>Entrada principal</td><td>Materiales, componentes e información.</td><td>Información, solicitud, tiempo y participación del cliente.</td><td>Productos adquiridos, pedidos e información comercial.</td></tr>
+            <tr><td>Transformación</td><td>Física, química, de ensamble o configuración.</td><td>Atención, diagnóstico, conocimiento o intervención.</td><td>Compra, almacenamiento, surtido, venta y distribución.</td></tr>
+            <tr><td>Salida</td><td>Producto tangible y documentación asociada.</td><td>Resultado principalmente intangible o experiencia.</td><td>Producto entregado y servicio comercial o logístico.</td></tr>
+            <tr><td>Participación del cliente</td><td>Generalmente indirecta durante la fabricación.</td><td>Puede ser directa y frecuente.</td><td>Directa en pedido, compra, entrega y posventa.</td></tr>
+            <tr><td>Almacenamiento</td><td>El producto terminado puede almacenarse, según su naturaleza.</td><td>La capacidad no utilizada suele ser perecedera.</td><td>El inventario puede almacenarse, sujeto a sus características.</td></tr>
+            <tr><td>Ejemplo didáctico</td><td>Fabricación de una pieza.</td><td>Mantenimiento de equipo.</td><td>Distribución de material de oficina.</td></tr>
+            <tr><td>Indicadores frecuentes</td><td>Rendimiento, defectos, tiempo de ciclo.</td><td>Tiempo de atención, cumplimiento, satisfacción.</td><td>Pedido completo, entrega, inventario, devoluciones.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Otra manera de clasificar los procesos</h3>
+      <div class="process-levels">
+        <article class="level card"><span class="tag">Dirección</span><h3>Estratégicos</h3><p>Definen rumbo, prioridades y decisiones de largo alcance. Ejemplo: planeación de mercados y capacidad.</p></article>
+        <article class="level card"><span class="tag">Valor</span><h3>Operativos o clave</h3><p>Generan directamente el bien o servicio para el cliente. Ejemplo: fabricar, atender, surtir o distribuir.</p></article>
+        <article class="level card"><span class="tag">Soporte</span><h3>De apoyo</h3><p>Proporcionan recursos y condiciones para operar. Ejemplo: mantenimiento, compras internas o gestión de personal.</p></article>
+      </div>
+    </section>
+
+    <section id="capacidad" aria-labelledby="titulo-capacidad">
+      <div class="section-head">
+        <span class="section-no">1.3</span>
+        <div>
+          <p class="section-kicker">¿Cuánto puede producir el sistema?</p>
+          <h2 id="titulo-capacidad">Capacidad de producción</h2>
+          <p class="section-intro">Es la cantidad máxima de productos o servicios que un proceso, instalación o sistema puede generar durante un periodo determinado y bajo condiciones establecidas. Siempre debe expresarse como cantidad de salida por unidad de tiempo.</p>
+        </div>
+      </div>
+
+      <div class="callout"><strong>Unidades correctas:</strong> piezas/hora, toneladas/día, pedidos/turno, pacientes/día o servicios/semana. Una cifra sin periodo no describe completamente la capacidad.</div>
+
+      <div class="capacity-grid">
+        <article class="capacity-card card"><h3>Capacidad de diseño</h3><p>Máximo teórico previsto para el sistema bajo las condiciones de diseño.</p></article>
+        <article class="capacity-card card"><h3>Capacidad efectiva</h3><p>Máximo razonable después de considerar condiciones operativas previstas.</p></article>
+        <article class="capacity-card card"><h3>Producción real</h3><p>Salida que efectivamente se obtuvo durante el periodo observado.</p></article>
+        <article class="capacity-card card"><h3>Capacidad no utilizada</h3><p>Diferencia entre una capacidad de referencia y la producción real.</p></article>
+        <article class="capacity-card card"><h3>Cuello de botella</h3><p>Etapa cuya capacidad restringe el flujo o salida del proceso completo.</p></article>
+      </div>
+
+      <div class="formula-grid">
+        <div class="formula">
+          <strong>Utilización (%)</strong>
+          <span class="fraction"><span>Producción real</span><span>Capacidad de diseño</span></span> × 100
+        </div>
+        <div class="formula">
+          <strong>Eficiencia (%)</strong>
+          <span class="fraction"><span>Producción real</span><span>Capacidad efectiva</span></span> × 100
+        </div>
+      </div>
+      <p class="note"><strong>No son sinónimos:</strong> la utilización compara la salida real con el máximo de diseño; la eficiencia la compara con la capacidad efectiva prevista.</p>
+
+      <article class="worked-example card">
+        <div>
+          <h3>Ejemplo resuelto</h3>
+          <p>Una línea tiene los siguientes datos hipotéticos por turno:</p>
+          <div class="data-stack">
+            <div><span>Diseño</span><strong>500 unidades</strong></div>
+            <div><span>Efectiva</span><strong>450 unidades</strong></div>
+            <div><span>Real</span><strong>405 unidades</strong></div>
+          </div>
+        </div>
+        <div>
+          <div class="calculation"><strong>Utilización:</strong> 405 ÷ 500 × 100 = <strong>81 %</strong></div>
+          <div class="calculation"><strong>Eficiencia:</strong> 405 ÷ 450 × 100 = <strong>90 %</strong></div>
+          <div class="calculation"><strong>Capacidad no utilizada respecto al diseño:</strong> 500 − 405 = <strong>95 unidades/turno</strong></div>
+          <p class="note">El ejemplo es hipotético y tiene fines didácticos. Interpretar el desempeño requiere información del contexto, las restricciones y los objetivos de la organización.</p>
+        </div>
+      </article>
+
+      <article class="bottleneck card">
+        <h3>El cuello de botella limita la salida</h3>
+        <p>En un proceso secuencial, la capacidad global suele quedar restringida por la operación con menor capacidad, siempre que no existan otras restricciones.</p>
+        <div class="station-line" aria-label="Cuatro operaciones secuenciales; la operación B es el cuello de botella">
+          <div class="station"><strong>Operación A</strong>60 unidades/h</div>
+          <div class="station bottle"><strong>Operación B</strong>45 unidades/h<br><small>Cuello de botella</small></div>
+          <div class="station"><strong>Operación C</strong>50 unidades/h</div>
+          <div class="station"><strong>Operación D</strong>55 unidades/h</div>
+        </div>
+        <div class="callout"><strong>Capacidad máxima del proceso: 45 unidades por hora.</strong> Aumentar solamente la capacidad de A, C o D no elevaría la salida del sistema mientras B permanezca limitada a 45 unidades por hora.</div>
+        <p class="note">Todos los valores son hipotéticos.</p>
+      </article>
+
+      <div class="calculator card" aria-labelledby="calc-title">
+        <form id="capacityForm" novalidate>
+          <h3 id="calc-title">Calculadora de capacidad</h3>
+          <div class="form-grid">
+            <div class="field"><label for="designCapacity">Capacidad de diseño</label><input id="designCapacity" type="number" min="0" step="any" inputmode="decimal" required></div>
+            <div class="field"><label for="effectiveCapacity">Capacidad efectiva</label><input id="effectiveCapacity" type="number" min="0" step="any" inputmode="decimal" required></div>
+            <div class="field"><label for="actualOutput">Producción real</label><input id="actualOutput" type="number" min="0" step="any" inputmode="decimal" required></div>
+            <div class="field"><label for="unitMeasure">Unidad de medida</label><input id="unitMeasure" type="text" placeholder="piezas" value="unidades"></div>
+            <div class="field full"><label for="periodMeasure">Periodo</label><input id="periodMeasure" type="text" placeholder="hora, turno, día..." value="turno"></div>
+          </div>
+          <p><button class="btn btn-primary" type="submit">Calcular resultados</button></p>
+          <p class="feedback error" id="calcError" role="alert"></p>
+        </form>
+        <div class="calc-results" aria-live="polite">
+          <h3>Resultados</h3>
+          <div class="metric"><span>Utilización</span><output id="utilizationResult">—</output></div>
+          <div class="metric"><span>Eficiencia</span><output id="efficiencyResult">—</output></div>
+          <div class="metric"><span>Capacidad no utilizada</span><output id="unusedResult">—</output></div>
+          <p class="calc-message" id="calcInterpretation">Ingresa los datos para comparar la producción real con las capacidades de diseño y efectiva.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="caso" aria-labelledby="titulo-caso">
+      <div class="section-head">
+        <span class="section-no">04</span>
+        <div>
+          <p class="section-kicker">Integración</p>
+          <h2 id="titulo-caso">Caso: taller y comercializadora</h2>
+          <p class="section-intro">Aplica los tres temas en un mismo sistema. Lee el caso, formula tu propio análisis y compáralo con la propuesta.</p>
+        </div>
+      </div>
+
+      <article class="case card">
+        <h3>Caso hipotético: organizadores metálicos</h3>
+        <p>Una pequeña empresa fabrica organizadores metálicos y también comercializa accesorios adquiridos a proveedores. Los clientes solicitan recibir el modelo y la cantidad confirmados, sin daños y en la fecha acordada. La fabricación pasa por corte, doblado, ensamble, acabado e inspección. Las capacidades observadas son 30, 24, 27, 25 y 28 unidades por hora, respectivamente. Después de la inspección, los productos se almacenan, se integran con los accesorios pedidos y se preparan para entrega.</p>
+        <p><strong>Antes de abrir el análisis, identifica:</strong> necesidad, requerimiento, especificaciones, entradas, transformación, salidas, tipo de proceso, recursos, controles, capacidad, cuello de botella e indicadores.</p>
+        <button class="btn btn-secondary" id="toggleAnalysis" type="button" aria-expanded="false" aria-controls="caseAnalysis">Ver análisis</button>
+        <div class="answer-panel" id="caseAnalysis" hidden>
+          <div class="analysis-grid">
+            <div><strong>Necesidad</strong>Recibir una solución de organización adecuada y completa.</div>
+            <div><strong>Requerimiento</strong>Entregar modelo y cantidad confirmados, sin daño y en la fecha acordada.</div>
+            <div><strong>Especificaciones</strong>Código de modelo, cantidad, condición y fecha registrados en el pedido.</div>
+            <div><strong>Entradas</strong>Lámina, componentes, accesorios comprados, pedido e información técnica.</div>
+            <div><strong>Transformación</strong>Corte, doblado, ensamble, acabado, inspección, surtido y preparación.</div>
+            <div><strong>Salidas</strong>Organizadores fabricados, accesorios surtidos y pedido preparado.</div>
+            <div><strong>Tipo de proceso</strong>Combina manufactura con operaciones comerciales y logísticas.</div>
+            <div><strong>Recursos y controles</strong>Personal, equipos, herramientas, planos, pedido e inspecciones.</div>
+            <div><strong>Capacidad</strong>En la secuencia de fabricación, el máximo está limitado a 24 unidades/hora.</div>
+            <div><strong>Cuello de botella</strong>La operación de doblado, con 24 unidades/hora.</div>
+            <div><strong>Indicadores posibles</strong>Tiempo de ciclo, pedidos completos, entregas acordadas y unidades rechazadas.</div>
+            <div><strong>Retroalimentación</strong>Devoluciones, reclamos, registros de incumplimiento y resultados de inspección.</div>
+          </div>
+          <p class="note">Esta es una solución posible. Pueden existir otras respuestas correctas cuando estén justificadas con los datos del caso.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="practica" aria-labelledby="titulo-practica">
+      <div class="section-head">
+        <span class="section-no">05</span>
+        <div>
+          <p class="section-kicker">Comprobación</p>
+          <h2 id="titulo-practica">Comprueba lo aprendido</h2>
+          <p class="section-intro">Responde los diez reactivos. Cada pregunta ofrece retroalimentación después de registrar tu respuesta.</p>
+        </div>
+      </div>
+
+      <div class="quiz-shell card">
+        <div class="quiz-status" aria-live="polite">
+          <span id="quizProgress">Respondidas: 0 de 10</span>
+          <strong id="quizScore">Aciertos: 0</strong>
+        </div>
+        <div class="quiz-list" id="quizList"></div>
+        <div class="score-final" id="finalScore" hidden></div>
+        <p><button class="btn btn-ghost" id="resetQuiz" type="button">Reiniciar cuestionario</button></p>
+      </div>
+    </section>
+
+    <section id="fuentes" aria-labelledby="titulo-fuentes">
+      <div class="section-head">
+        <span class="section-no">06</span>
+        <div>
+          <p class="section-kicker">Consulta académica</p>
+          <h2 id="titulo-fuentes">Fuentes de referencia</h2>
+          <p class="section-intro">El contenido se presenta con fines educativos y se apoya en conceptos ampliamente utilizados en gestión de operaciones, manufactura y sistemas de calidad.</p>
+        </div>
+      </div>
+      <div class="sources">
+        <div class="callout"><strong>Nota de uso:</strong> los ejemplos y cifras marcados como hipotéticos no representan datos de empresas reales. Las especificaciones de una operación real deben basarse en sus requisitos contractuales, técnicos y normativos aplicables.</div>
+        <div class="card example-card">
+          <ul>
+            <li>ISO 9000, <em>Sistemas de gestión de la calidad — Fundamentos y vocabulario</em>.</li>
+            <li>Mikell P. Groover, <em>Fundamentals of Modern Manufacturing: Materials, Processes, and Systems</em>.</li>
+            <li>Lee J. Krajewski, Manoj K. Malhotra y Larry P. Ritzman, <em>Operations Management: Processes and Supply Chains</em>.</li>
+            <li>Richard B. Chase y F. Robert Jacobs, <em>Operations and Supply Chain Management</em>.</li>
+            <li>Serope Kalpakjian y Steven R. Schmid, <em>Manufacturing Engineering and Technology</em>.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Ingeniería de Procesos Industriales</strong><br>
+    Temas 1.1, 1.2 y 1.3 · Recurso educativo interactivo
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var navToggle = document.getElementById("navToggle");
+      var navLinks = document.getElementById("navLinks");
+      navToggle.addEventListener("click", function () {
+        var open = navLinks.classList.toggle("open");
+        navToggle.setAttribute("aria-expanded", String(open));
+      });
+      navLinks.addEventListener("click", function (event) {
+        if (event.target.tagName === "A") {
+          navLinks.classList.remove("open");
+          navToggle.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      var tabButtons = Array.prototype.slice.call(document.querySelectorAll(".tab-btn"));
+      var tabPanels = Array.prototype.slice.call(document.querySelectorAll(".tab-panel"));
+      function activateTab(button) {
+        tabButtons.forEach(function (item) {
+          var active = item === button;
+          item.setAttribute("aria-selected", String(active));
+          item.tabIndex = active ? 0 : -1;
+        });
+        tabPanels.forEach(function (panel) {
+          panel.hidden = panel.id !== button.getAttribute("aria-controls");
+        });
+      }
+      tabButtons.forEach(function (button, index) {
+        button.addEventListener("click", function () { activateTab(button); });
+        button.addEventListener("keydown", function (event) {
+          if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+          event.preventDefault();
+          var direction = event.key === "ArrowRight" ? 1 : -1;
+          var next = (index + direction + tabButtons.length) % tabButtons.length;
+          activateTab(tabButtons[next]);
+          tabButtons[next].focus();
+        });
+      });
+      activateTab(tabButtons[0]);
+
+      document.getElementById("checkClassify").addEventListener("click", function () {
+        var selects = Array.prototype.slice.call(document.querySelectorAll("#classifyActivity select"));
+        var unanswered = selects.some(function (select) { return !select.value; });
+        var feedback = document.getElementById("classifyFeedback");
+        if (unanswered) {
+          feedback.textContent = "Selecciona una respuesta en las cuatro expresiones.";
+          feedback.className = "feedback error";
+          return;
+        }
+        var correct = selects.filter(function (select) { return select.value === select.dataset.answer; }).length;
+        feedback.textContent = correct === selects.length
+          ? "Correcto: identificaste las necesidades generales y los criterios verificables."
+          : "Obtuviste " + correct + " de " + selects.length + ". Recuerda: una especificación establece qué se comprobará.";
+        feedback.className = correct === selects.length ? "feedback ok" : "feedback error";
+      });
+
+      var capacityForm = document.getElementById("capacityForm");
+      capacityForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var design = Number(document.getElementById("designCapacity").value);
+        var effective = Number(document.getElementById("effectiveCapacity").value);
+        var actual = Number(document.getElementById("actualOutput").value);
+        var unit = document.getElementById("unitMeasure").value.trim() || "unidades";
+        var period = document.getElementById("periodMeasure").value.trim() || "periodo";
+        var error = document.getElementById("calcError");
+
+        if (!Number.isFinite(design) || !Number.isFinite(effective) || !Number.isFinite(actual) || design <= 0 || effective <= 0 || actual < 0) {
+          error.textContent = "Ingresa capacidades mayores que cero y una producción real igual o mayor que cero.";
+          return;
+        }
+        error.textContent = "";
+        var utilization = actual / design * 100;
+        var efficiency = actual / effective * 100;
+        var unused = design - actual;
+        var format = function (value) { return new Intl.NumberFormat("es-MX", { maximumFractionDigits: 2 }).format(value); };
+        document.getElementById("utilizationResult").textContent = format(utilization) + " %";
+        document.getElementById("efficiencyResult").textContent = format(efficiency) + " %";
+        document.getElementById("unusedResult").textContent = format(unused) + " " + unit + "/" + period;
+        var notes = ["La utilización compara la salida real con la capacidad de diseño; la eficiencia la compara con la capacidad efectiva."];
+        if (effective > design) notes.push("Revisa el contexto: la capacidad efectiva registrada es mayor que la de diseño.");
+        if (actual > design) notes.push("La producción real supera la capacidad de diseño indicada; esto puede requerir revisar los datos o explicar condiciones extraordinarias.");
+        if (unused < 0) notes.push("La capacidad no utilizada es negativa porque la producción real supera el valor de diseño capturado.");
+        notes.push("Estos porcentajes necesitan contexto operativo para interpretarse; por sí solos no indican un desempeño bueno o malo.");
+        document.getElementById("calcInterpretation").textContent = notes.join(" ");
+      });
+
+      var toggleAnalysis = document.getElementById("toggleAnalysis");
+      var caseAnalysis = document.getElementById("caseAnalysis");
+      toggleAnalysis.addEventListener("click", function () {
+        var open = caseAnalysis.hidden;
+        caseAnalysis.hidden = !open;
+        toggleAnalysis.setAttribute("aria-expanded", String(open));
+        toggleAnalysis.textContent = open ? "Ocultar análisis" : "Ver análisis";
+      });
+
+      var questions = [
+        {
+          prompt: "1. ¿Qué elemento distingue mejor a un proceso de una actividad aislada?",
+          options: ["La existencia de un formato impreso.", "La relación ordenada de actividades que transforma entradas en resultados.", "El uso obligatorio de maquinaria.", "La participación exclusiva de un departamento."],
+          answer: 1,
+          explanation: "Un proceso integra actividades relacionadas para convertir entradas en resultados con un propósito."
+        },
+        {
+          prompt: "2. ¿Qué describe un procedimiento?",
+          options: ["La forma especificada de realizar una actividad o proceso.", "El resultado financiero de una empresa.", "La necesidad general del cliente.", "La capacidad máxima de una máquina."],
+          answer: 0,
+          explanation: "El procedimiento establece cómo se realiza una actividad o un proceso."
+        },
+        {
+          prompt: "3. ¿Cuál expresión es una especificación verificable?",
+          options: ["El cliente quiere un servicio excelente.", "El producto debe verse moderno.", "El código y la cantidad entregados deben coincidir con la orden confirmada.", "El pedido debe llegar pronto."],
+          answer: 2,
+          explanation: "Código y cantidad pueden compararse directamente con la orden confirmada."
+        },
+        {
+          prompt: "4. ¿Cuál es la secuencia lógica para diseñar un proceso orientado al cliente?",
+          options: ["Proceso → necesidad → especificación → requerimiento.", "Especificación → satisfacción → necesidad → proceso.", "Necesidad → requerimiento → especificación → proceso.", "Salida → entrada → cliente → actividad."],
+          answer: 2,
+          explanation: "Primero se comprende la necesidad, se concreta el requerimiento y se traduce en especificaciones para el proceso."
+        },
+        {
+          prompt: "5. ¿Qué caracteriza principalmente a un proceso de manufactura?",
+          options: ["Transforma materiales o componentes para obtener un producto.", "Solo utiliza información y nunca materiales.", "No requiere controles de calidad.", "Siempre produce bajo pedido individual."],
+          answer: 0,
+          explanation: "La manufactura implica transformación física, química, de ensamble o configuración de materiales y componentes."
+        },
+        {
+          prompt: "6. ¿Por qué se dice que parte de la capacidad de un servicio puede ser perecedera?",
+          options: ["Porque todos los servicios usan materiales caducos.", "Porque el tiempo de atención no utilizado normalmente no puede almacenarse.", "Porque los clientes siempre cambian de proveedor.", "Porque el servicio nunca puede medirse."],
+          answer: 1,
+          explanation: "Una hora disponible que no se utilizó para atender no suele poder guardarse para otro periodo."
+        },
+        {
+          prompt: "7. ¿Cuál afirmación describe mejor a una empresa comercializadora?",
+          options: ["Siempre transforma químicamente los productos.", "Integra compras, almacenamiento, ventas, distribución y servicio sin transformar necesariamente el producto.", "Únicamente realiza publicidad.", "No necesita procesos logísticos."],
+          answer: 1,
+          explanation: "La comercialización articula procesos comerciales, logísticos, administrativos y de atención."
+        },
+        {
+          prompt: "8. Un proceso tiene etapas con capacidades de 52, 47, 61 y 49 piezas/hora. ¿Cuál es su capacidad máxima secuencial?",
+          options: ["61 piezas/hora", "52 piezas/hora", "49 piezas/hora", "47 piezas/hora"],
+          answer: 3,
+          explanation: "La etapa de 47 piezas/hora es el cuello de botella y limita la salida secuencial."
+        },
+        {
+          prompt: "9. Una operación produce 320 unidades frente a una capacidad de diseño de 400. ¿Cuál es su utilización?",
+          options: ["75 %", "80 %", "85 %", "125 %"],
+          answer: 1,
+          explanation: "Utilización = 320 ÷ 400 × 100 = 80 %."
+        },
+        {
+          prompt: "10. Una operación produce 360 unidades y su capacidad efectiva es 450. ¿Cuál es su eficiencia?",
+          options: ["72 %", "80 %", "90 %", "125 %"],
+          answer: 1,
+          explanation: "Eficiencia = 360 ÷ 450 × 100 = 80 %."
+        }
+      ];
+
+      var quizList = document.getElementById("quizList");
+      var answered = new Array(questions.length).fill(false);
+      var correctAnswers = new Array(questions.length).fill(false);
+
+      function updateQuizStatus() {
+        var answeredCount = answered.filter(Boolean).length;
+        var score = correctAnswers.filter(Boolean).length;
+        document.getElementById("quizProgress").textContent = "Respondidas: " + answeredCount + " de " + questions.length;
+        document.getElementById("quizScore").textContent = "Aciertos: " + score;
+        var final = document.getElementById("finalScore");
+        if (answeredCount === questions.length) {
+          final.hidden = false;
+          final.textContent = "Resultado final: " + score + " de " + questions.length + " respuestas correctas.";
+        } else {
+          final.hidden = true;
+        }
+      }
+
+      function buildQuiz() {
+        quizList.innerHTML = "";
+        questions.forEach(function (question, qIndex) {
+          var article = document.createElement("article");
+          article.className = "question";
+          var heading = document.createElement("h3");
+          heading.textContent = question.prompt;
+          article.appendChild(heading);
+
+          var options = document.createElement("div");
+          options.className = "options";
+          question.options.forEach(function (text, optionIndex) {
+            var label = document.createElement("label");
+            label.className = "option";
+            var input = document.createElement("input");
+            input.type = "radio";
+            input.name = "question-" + qIndex;
+            input.value = String(optionIndex);
+            var span = document.createElement("span");
+            span.textContent = text;
+            label.appendChild(input);
+            label.appendChild(span);
+            options.appendChild(label);
+          });
+          article.appendChild(options);
+
+          var actions = document.createElement("div");
+          actions.className = "question-actions";
+          var check = document.createElement("button");
+          check.type = "button";
+          check.className = "btn btn-primary";
+          check.textContent = "Registrar respuesta";
+          var feedback = document.createElement("p");
+          feedback.className = "question-feedback";
+          feedback.setAttribute("role", "status");
+          feedback.setAttribute("aria-live", "polite");
+
+          check.addEventListener("click", function () {
+            var selected = article.querySelector("input:checked");
+            if (!selected) {
+              feedback.textContent = "Selecciona una opción antes de registrar.";
+              feedback.style.color = "var(--danger)";
+              return;
+            }
+            var isCorrect = Number(selected.value) === question.answer;
+            answered[qIndex] = true;
+            correctAnswers[qIndex] = isCorrect;
+            article.classList.remove("correct", "incorrect");
+            article.classList.add(isCorrect ? "correct" : "incorrect");
+            feedback.textContent = (isCorrect ? "Correcto. " : "Revisa. ") + question.explanation;
+            feedback.style.color = isCorrect ? "var(--success)" : "var(--danger)";
+            Array.prototype.forEach.call(article.querySelectorAll("input"), function (input) { input.disabled = true; });
+            check.disabled = true;
+            check.textContent = "Respuesta registrada";
+            updateQuizStatus();
+          });
+
+          actions.appendChild(check);
+          actions.appendChild(feedback);
+          article.appendChild(actions);
+          quizList.appendChild(article);
+        });
+        updateQuizStatus();
+      }
+
+      document.getElementById("resetQuiz").addEventListener("click", function () {
+        answered = new Array(questions.length).fill(false);
+        correctAnswers = new Array(questions.length).fill(false);
+        buildQuiz();
+        document.getElementById("practica").scrollIntoView({ behavior: "smooth" });
+      });
+
+      buildQuiz();
+    }());
+  </script>
+</body>
+</html>
